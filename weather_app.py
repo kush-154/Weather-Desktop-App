@@ -224,6 +224,7 @@ class WeatherApp(QWidget):
         self.temperature.setText(message)
         self.description.setText("")
         self.icon_weather.setText("")
+        self.name_city.setText("")
         self.min_max.setText("")
         self.wind_speed.setText("")
         self.humidity.setText("")
