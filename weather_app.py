@@ -49,6 +49,8 @@ class WeatherApp(QWidget):
         weather_layout = QVBoxLayout()
         weather_layout.setSpacing(15)
 
+        self.name_city = QLabel()
+        self.name_city.setAlignment(Qt.AlignCenter)
         self.temperature = QLabel()
         self.temperature.setAlignment(Qt.AlignCenter)
         self.icon_weather = QLabel()
@@ -63,7 +65,8 @@ class WeatherApp(QWidget):
         self.wind_speed.setAlignment(Qt.AlignCenter)
         self.humidity = QLabel()
         self.humidity.setAlignment(Qt.AlignCenter)
-
+        
+        weather_layout.addWidget(self.name_city)
         weather_layout.addWidget(self.temperature)
         weather_layout.addWidget(self.icon_weather)
         weather_layout.addWidget(self.description)
@@ -79,6 +82,7 @@ class WeatherApp(QWidget):
 
     def setTheme(self):
         self.icon_weather.setObjectName("icon")
+        self.name_city.setObjectName("city")
         self.setStyleSheet(
             """
             QWidget {
@@ -170,6 +174,9 @@ class WeatherApp(QWidget):
                 font-size: 30px;
                 margin: 5px 0;
             }
+            #city{
+                font-size:20px;
+            }
             
         """
         )
@@ -221,8 +228,12 @@ class WeatherApp(QWidget):
         self.wind_speed.setText("")
         self.humidity.setText("")
         self.feelslike.setText("")
+        
+
 
     def display_weather(self, data):
+        self.temperature.setStyleSheet("color:white;" "font-size:25px;")
+        
         temp_inK = data["main"]["temp"]  #! access main dictionary
         temp_inC = temp_inK - 273.15
         self.temperature.setText(f"{temp_inC:.0f}°C")
@@ -259,6 +270,9 @@ class WeatherApp(QWidget):
 
         humidity_data = data["main"]["humidity"]
         self.humidity.setText(f"Humidity: {humidity_data:.0f}%")
+        
+        name_of_city = data["name"].title()
+        self.name_city.setText(name_of_city)
 
         print(data)
 
