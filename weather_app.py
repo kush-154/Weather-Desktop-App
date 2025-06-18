@@ -19,7 +19,7 @@ class WeatherApp(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Weather App")
-        self.setWindowIcon(QIcon("images/weather_icon.jpg"))
+        self.setWindowIcon(QIcon("weather_icon.jpg"))
         self.setMinimumSize(400, 600)
         self.initUI()
         self.setTheme()
